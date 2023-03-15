@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora IMC</title>
+
+    <style>
+        body {
+
+            text-align: center;
+        }
+
+        .form {
+            text-align: center;
+            border: auto;
+            padding: 2%;
+            border-radius: 10px;
+            border-style: solid;
+            display: inline-block;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: lightslategray;
+        }
+
+        .calcular {
+            border-radius: 7%;
+            width: auto;
+        }
+
+        .limpar {
+            border-radius: 7%;
+            width: auto;
+        }
+
+        input {
+            border-radius: 7%;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <form class="form">
+        <div class="contentStyle">
+            <h1 class="title">Calculadora IMC</h1>
+            <div class="inputs">
+
+                <input id="num1" placeholder="Peso Em Kg's" type="text"></input> <br>
+                <br>
+                <input id="num2" placeholder="Altura Em M's e Cm's" type="text"></input>
+                <h3>Selecione O Seu Sexo</h3>
+                <input id="M" onclick="sexo('M')" name="OPCAO" type="radio">Masculino</input>
+                <input id="F" onclick="sexo('F')" name="OPCAO" type="radio">Feminino</input>
+                <br><br>
+            </div>
+            <button class="calcular" type="button" onclick="contas('+')">Calcular</button>
+            <button class="limpar" type="button" onclick="contas('_')">Limpar</button><br><br>
+            <input id="conta" type="text" disabled></input><br>
+            <input id="retorno" type="text" disabled></input>
+        </div>
+    </form>
+
+    <script>
+        var genero;
+        function sexo(caractere) {
+            genero = null;
+            switch (caractere) {
+
+                case 'M':
+                    genero = "Masculino";
+                    break;
+
+                case 'F':
+                    genero = "Feminino";
+        
+                    break;
+
+            }
+           
+        }
+        function contas(op) {
+            num1 = parseFloat(document.getElementById("num1").value);
+            num2 = parseFloat(document.getElementById("num2").value);
+            msg = document.getElementById("retorno").value;
+            switch (op) {
+
+                case '+':
+                    resultado = (num1 / (num2 * num2)).toFixed(0);
+                    
+                    if(genero=="Masculino"){
+                       if(resultado <20){
+                        msg = "Abaixo do Peso";
+                        document.getElementById("retorno").value = msg;
+                       }
+                       else if(resultado >20 && resultado <=24.9){
+                        msg = "Normal";
+                        document.getElementById("retorno").value = msg;
+                       }
+                       else if(resultado >24.9 && resultado <=29.9){
+                        msg = "Obesidade Leve";
+                        document.getElementById("retorno").value = msg;
+                       }
+                       else if(resultado >29.9 && resultado <=39.9){
+                        msg = "Obesidade Moderada";
+                        document.getElementById("retorno").value = msg;
+                       }else{
+                        msg = "Obesidade Mórbida";
+                        document.getElementById("retorno").value = msg;
+                       }
+                    }
+                    else{
+                        if(resultado <19){
+                        msg = "Abaixo do Peso";
+                        document.getElementById("retorno").value = msg;
+                       }
+                       else if(resultado >18 && resultado <=23.9){
+                        msg = "Normal";
+                        document.getElementById("retorno").value = msg;
+                       }
+                       else if(resultado >24 && resultado <=28.9){
+                        msg = "Obesidade Leve";
+                        document.getElementById("retorno").value = msg;
+                       }
+                       else if(resultado >29 && resultado <=38.9){
+                        msg = "Obesidade Moderada";
+                        document.getElementById("retorno").value = msg;
+                       }else{
+                        msg = "Obesidade Mórbida";
+                        document.getElementById("retorno").value = msg;
+                       }
+                    }
+                    
+                    break;
+
+                case '_':
+                    resultado = null;
+                    document.getElementById("retorno").value = null;
+                    document.getElementById("num1").value = null;
+                    document.getElementById("num2").value = null;
+                    break;
+            }
+
+            document.getElementById("conta").value = resultado;
+        }
+
+    </script>
+
+
+</body>
+
+</html>
